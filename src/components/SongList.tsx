@@ -12,8 +12,8 @@ interface SongListProps {
 
 const SongList: React.FC<SongListProps> = ({ songs, onSongSelect }) => {
 	return (
-		<div className="song-list mb-6 w-full overflow-x-auto scrollbar-hide py-4">
-			<div className="flex space-x-4 p-2">
+		<div className="song-list mb-6 w-18 overflow-x-auto scrollbar-hide py-4">
+			<div className="flex space-y-4 p-2 flex-col max-w-sm">
 				{songs.map((song, index) => (
 					<button
 						key={index}

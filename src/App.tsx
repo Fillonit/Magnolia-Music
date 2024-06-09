@@ -5,6 +5,7 @@ import "./App.css";
 import MusicPlayer from "./components/MusicPlayer";
 import AnimatedBackground from "./components/Pixi/Background";
 import Preloader from "./components/Loader";
+import SongList from "./components/SongList";
 
 const App: React.FC = () => {
 	const [loading, setLoading] = useState(true);
@@ -28,13 +29,25 @@ const App: React.FC = () => {
 
 	return (
 		<div className="App">
-			<header className="App-header flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-				<h1 className="text-4xl font-bold mb-8">React Music Player</h1>
+			<div className="App-header flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
 				<AppProvider value={app}>
 					<AnimatedBackground />
 				</AppProvider>
 				<MusicPlayer />
-			</header>
+				<SongList
+					songs={[
+						{
+							title: "All I Ever Wanted",
+							url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+						},
+						{
+							title: "Menage",
+							url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+						},
+					]}
+					onSongSelect={(song) => console.log(song)}
+				/>
+			</div>
 		</div>
 	);
 };
