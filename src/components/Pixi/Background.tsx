@@ -1,6 +1,7 @@
 import { Stage, Sprite, useApp, Text as PixiReactText } from "@pixi/react";
 import { Text as PixiText } from "@pixi/text";
 import { useEffect, useRef } from "react";
+import { TextStyle } from "@pixi/text";
 
 import Magnolia from "/Magnolia.png";
 
@@ -34,6 +35,19 @@ const AnimatedBackground: React.FC = () => {
 		};
 	}, [app]);
 
+	const textStyle = new TextStyle({
+		align: "center",
+		fontFamily: '"Source Sans Pro", Helvetica, sans-serif',
+		fontSize: 70,
+		fontWeight: "300",
+		fill: ["#ffffff"],
+		stroke: "#4f46e5",
+		strokeThickness: 3,
+		letterSpacing: 10,
+		wordWrap: true,
+		wordWrapWidth: 300,
+	});
+
 	return (
 		<section className="text-gray-600 body-font relative min-h-screen">
 			<div className="absolute inset-0 bg-slate-900">
@@ -56,20 +70,7 @@ const AnimatedBackground: React.FC = () => {
 						anchor={0.5}
 						x={650}
 						y={150}
-						style={{
-							align: "center",
-							fontFamily:
-								'"Source Sans Pro", Helvetica, sans-serif',
-							fontSize: 70,
-							fontWeight: "300",
-							fill: ["#ffffff"],
-							stroke: "#4f46e5",
-							strokeThickness: 3,
-							letterSpacing: 10,
-							wordWrap: true,
-							wordWrapWidth: 300,
-							styleID: 0,
-						}}
+						style={textStyle}
 					/>
 				</Stage>
 			</div>
