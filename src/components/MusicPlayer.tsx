@@ -22,31 +22,16 @@ type Song = {
 	src: string;
 };
 
-import AllIEverWanted from "/All_I_EVER_WANTED.mp3";
-import Menage from "/Menage (Master).mp3";
-import FutureCover from "/Future-Cover.jpg";
-
-// type MusicSliderProps = {
-// 	songs: Song[];
-// };
-
-// const MusicSlider: React.FC<MusicSliderProps> = ({ songs }) => {
-// 	return (
-// 		<Slider {...settings}>
-// 			{songs.map((song, index) => (
-// 				<div key={index} onClick={() => handleSongChange(song)}>
-// 					<img
-// 						src={song.cover}
-// 						alt={song.title}
-// 						className="w-32 h-32 object-cover rounded-lg shadow-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-110 hover:shadow-2xl"
-// 					/>
-// 					<div>{song.title}</div>
-// 					<div>{song.artist}</div>
-// 				</div>
-// 			))}
-// 		</Slider>
-// 	);
-// };
+import AllIEverWanted from "../assets/Music/All_I_EVER_WANTED.mp3";
+import FutureCover from "../assets/Image/Future-Cover.jpg";
+import MariaImDrunk from "../assets/Music/Maria I'm Drunk (feat. Justin Bieber & Young Thug).mp3";
+import MariaImDrunkImg from "../assets/Image/MariaImDrunk.jpeg";
+import Menage from "../assets/Music/Menage (Master).mp3";
+import MenageImg from "../assets/Image/wlr.jpg";
+import RichardMilliePlain from "../assets/Music/Richard Millie Plain.mp3";
+import RichardMilliePlainImg from "../assets/Image/Richard Millie Plain.jpeg";
+import DrugsYouShouldTryIt from "../assets/Music/Travis Scott - Drugs You Should Try It (Music Video).mp3";
+import DrugsYouShouldTryItImg from "../assets/Image/Drugs.jpg";
 
 const MusicPlayer: React.FC = () => {
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -57,28 +42,34 @@ const MusicPlayer: React.FC = () => {
 	const audioRef = useRef<HTMLAudioElement>(null);
 	const [songs] = useState<Song[]>([
 		{
+			title: "Drugs You Should Try It",
+			artist: "Travis Scott",
+			cover: DrugsYouShouldTryItImg,
+			src: DrugsYouShouldTryIt,
+		},
+		{
+			title: "Maria I'm Drunk",
+			artist: "Travis Scott",
+			cover: MariaImDrunkImg,
+			src: MariaImDrunk,
+		},
+		{
 			title: "All I Ever Wanted",
-			artist: "Artist 1",
+			artist: "Future",
 			cover: FutureCover,
 			src: AllIEverWanted,
 		},
 		{
 			title: "Menage",
-			artist: "Artist 2",
-			cover: FutureCover,
+			artist: "Playboi Carti",
+			cover: MenageImg,
 			src: Menage,
 		},
 		{
-			title: "All I Ever Wanted",
-			artist: "Artist 1",
-			cover: FutureCover,
-			src: AllIEverWanted,
-		},
-		{
-			title: "Menage",
-			artist: "Artist 2",
-			cover: FutureCover,
-			src: Menage,
+			title: "Richard Millie Plain",
+			artist: "Gunna",
+			cover: RichardMilliePlainImg,
+			src: RichardMilliePlain,
 		},
 	]);
 	const [currentSong, setCurrentSong] = useState<Song>(songs[0]);
@@ -180,101 +171,125 @@ const MusicPlayer: React.FC = () => {
 	};
 
 	return (
-		<div className="w-full max-w-screen-lg flex flex-col items-center p-8 bg-gray-800 text-white rounded-lg shadow-2xl">
-			{/* <div className="w-full"> */}
-			<Carousel
-				opts={{
-					align: "start",
-				}}
-				className="w-full max-w-screen-md px-8"
-			>
-				<CarouselContent>
-					{songs.map((song, index) => (
-						<CarouselItem
-							key={index}
-							className="md:basis-1/2 lg:basis-1/3"
-							onClick={() => handleSongChange(song)}
+		<div className="flex flex-col items-center justify-center min-h-screen">
+			<div className="w-full max-w-screen-lg flex flex-col items-center p-8 bg-slate-800 text-white rounded-lg shadow-2xl">
+				<div className="w-full flex justify-center items-center bg-indigo-700 text-white p-4 rounded-lg mb-4 shadow-lg transition-transform duration-300">
+					<div className="text-center">
+						<h2 className="text-2xl font-bold animate-fadeInOut">
+							Now Playing
+						</h2>
+						<p
+							className="text-xl animate-fadeInOut"
+							key={currentSong.title}
 						>
-							<div className="p-4">
-								<Card className="bg-gray-800 text-white rounded-lg overflow-hidden border-none">
-									<CardContent className="flex flex-col items-center justify-center p-6">
-										<img
-											src={song.cover}
-											alt={song.title}
-											className="w-32 h-32 object-cover rounded-lg shadow-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-110 hover:shadow-2xl"
-										/>
-										<p className="text-sm mt-2 font-semibold">
-											{song.title}
-										</p>
-										<p className="text-xs text-gray-400">
-											{song.artist}
-										</p>
-									</CardContent>
-								</Card>
-							</div>
-						</CarouselItem>
-					))}
-				</CarouselContent>
-				<CarouselPrevious className="text-white bg-gray-800 rounded-full p-2 hover:bg-gray-700 transition duration-200" />
-				<CarouselNext className="text-white bg-gray-800 rounded-full p-2 hover:bg-gray-700 transition duration-200" />
-			</Carousel>
-			{/* </div> */}
-			<audio
-				ref={audioRef}
-				src={currentSong.src}
-				onTimeUpdate={handleTimeUpdate}
-				onLoadedMetadata={handleLoadedMetadata}
-				className="hidden"
-			></audio>
-			<div className="controls flex items-center space-x-4 mt-4 w-full px-4 py-2 bg-gray-700 rounded-lg">
-				<button
-					onClick={handlePlayPause}
-					className="bg-indigo-500 hover:bg-indigo-400 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-				>
-					{isPlaying ? <CiPause1 size={24} /> : <CiPlay1 size={24} />}
-				</button>
-				<button
-					onClick={skipBackward}
-					className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
-				>
-					<HiOutlineBackward size={24} />
-				</button>
-				<button
-					onClick={skipForward}
-					className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
-				>
-					<HiOutlineForward size={24} />
-				</button>
-				<input
-					type="range"
-					min="0"
-					max="100"
-					value={(currentTime / duration) * 100 || 0}
-					onChange={handleSeek}
-					className="w-full h-2 bg-slate-500 accent-indigo-600 rounded-lg cursor-pointer"
-				/>
-				<div className="text-sm font-mono w-1/2">
-					{formatTime(currentTime)} / {formatTime(duration)}
+							{currentSong.title}
+						</p>
+						<p
+							className="text-md text-indigo-300 animate-fadeInOut"
+							key={currentSong.artist}
+						>
+							{currentSong.artist}
+						</p>
+					</div>
 				</div>
-				<div className="controls flex items-center space-x-4 w-full px-4 py-2 bg-gray-700 rounded-lg">
+				<Carousel
+					opts={{
+						align: "start",
+					}}
+					className="w-full max-w-screen-md px-8"
+				>
+					<CarouselContent>
+						{songs.map((song, index) => (
+							<CarouselItem
+								key={index}
+								className="md:basis-1/2 lg:basis-1/3 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110"
+								onClick={() => handleSongChange(song)}
+							>
+								<div className="p-4">
+									<Card className="bg-slate-900 text-white rounded-lg overflow-hidden border-none">
+										<CardContent className="flex flex-col items-center justify-center p-6">
+											<img
+												src={song.cover}
+												alt={song.title}
+												className="w-32 h-32 object-cover rounded-lg shadow-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-110 hover:shadow-2xl"
+											/>
+											<p className="text-sm mt-2 font-semibold truncate">
+												{song.title}
+											</p>
+											<p className="text-xs text-gray-400">
+												{song.artist}
+											</p>
+										</CardContent>
+									</Card>
+								</div>
+							</CarouselItem>
+						))}
+					</CarouselContent>
+					<CarouselPrevious className="text-white bg-gray-800 rounded-full p-2 hover:bg-gray-700 transition duration-200" />
+					<CarouselNext className="text-white bg-gray-800 rounded-full p-2 hover:bg-gray-700 transition duration-200" />
+				</Carousel>
+				{/* </div> */}
+				<audio
+					ref={audioRef}
+					src={currentSong.src}
+					onTimeUpdate={handleTimeUpdate}
+					onLoadedMetadata={handleLoadedMetadata}
+					className="hidden"
+				></audio>
+				<div className="controls flex items-center space-x-4 mt-4 w-full px-4 py-2 bg-gray-700 rounded-lg">
 					<button
-						onClick={toggleMute}
-						className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+						onClick={handlePlayPause}
+						className="bg-indigo-500 hover:bg-indigo-400 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
 					>
-						{isMuted ? (
-							<CiVolumeMute size={24} />
+						{isPlaying ? (
+							<CiPause1 size={24} />
 						) : (
-							<CiVolumeHigh size={24} />
+							<CiPlay1 size={24} />
 						)}
+					</button>
+					<button
+						onClick={skipBackward}
+						className="bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-3 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
+					>
+						<HiOutlineBackward size={24} />
+					</button>
+					<button
+						onClick={skipForward}
+						className="bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-3 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
+					>
+						<HiOutlineForward size={24} />
 					</button>
 					<input
 						type="range"
 						min="0"
 						max="100"
-						value={isMuted ? 0 : volume * 100}
-						onChange={handleVolumeChange}
-						className="w-full h-2 bg-slate-500 rounded-lg accent-indigo-600 cursor-pointer"
+						value={(currentTime / duration) * 100 || 0}
+						onChange={handleSeek}
+						className="w-full h-2 bg-slate-500 accent-indigo-600 rounded-lg cursor-pointer"
 					/>
+					<div className="text-sm font-mono w-1/2">
+						{formatTime(currentTime)} / {formatTime(duration)}
+					</div>
+					<div className="controls flex items-center space-x-4 w-full px-4 py-2 bg-gray-700 rounded-lg">
+						<button
+							onClick={toggleMute}
+							className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+						>
+							{isMuted ? (
+								<CiVolumeMute size={24} />
+							) : (
+								<CiVolumeHigh size={24} />
+							)}
+						</button>
+						<input
+							type="range"
+							min="0"
+							max="100"
+							value={isMuted ? 0 : volume * 100}
+							onChange={handleVolumeChange}
+							className="w-full h-2 bg-slate-500 rounded-lg accent-indigo-600 cursor-pointer"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

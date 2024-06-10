@@ -1,24 +1,13 @@
 import React from "react";
+import Trav from "../assets/trav.png";
 
 const Loader: React.FC = () => {
 	return (
-		<div className="flex items-center justify-center w-full h-screen">
-			<div className="flex justify-center items-center space-x-1 text-sm text-gray-700">
-				<svg
-					fill="none"
-					className="w-6 h-6 animate-spin"
-					viewBox="0 0 32 32"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						clipRule="evenodd"
-						d="M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z"
-						fill="currentColor"
-						fillRule="evenodd"
-					/>
-				</svg>
-
-				<div>Loading ...</div>
+		<div className="flex items-center justify-center w-full h-screen bg-slate-900">
+			{/* <div className="border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-indigo-600" /> */}
+			<div className="relative flex justify-center items-center">
+				<div className="absolute animate-spin rounded-full h-48 w-48 border-t-4 border-b-4 border-indigo-700"></div>
+				<img src={Trav} className="rounded-full h-44 w-44" />
 			</div>
 		</div>
 	);
