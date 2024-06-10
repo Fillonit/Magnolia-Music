@@ -25,6 +25,23 @@ const App: React.FC = () => {
 		backgroundColor: 0x1099bb,
 	});
 
+	useEffect(() => {
+		const handleLoad = () => {
+			setTimeout(() => setLoading(false), 1000);
+		};
+
+		if (document.readyState === "complete") {
+			handleLoad();
+		} else {
+			window.addEventListener("load", handleLoad);
+		}
+
+		// Cleanup
+		return () => {
+			window.removeEventListener("load", handleLoad);
+		};
+	}, []);
+
 	if (loading) {
 		return <Preloader />;
 	}
