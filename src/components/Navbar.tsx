@@ -6,7 +6,10 @@ const Loader: React.FC = () => {
 	return (
 		<header className="text-indigo-200 body-font bg-indigo-950">
 			<div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-				<a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+				<a
+					className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+					href="/"
+				>
 					<SiMusicbrainz className="w-10 h-10 text-white p-2 bg-indigo-600 rounded-full" />
 					<span className="ml-3 text-xl text-white">
 						Magnolia Music
