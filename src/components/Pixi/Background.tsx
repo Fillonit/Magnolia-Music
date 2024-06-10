@@ -1,7 +1,9 @@
 import { Stage, Sprite, useApp, Text as PixiReactText } from "@pixi/react";
 import { Text as PixiText } from "@pixi/text";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TextStyle } from "@pixi/text";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Magnolia from "/Magnolia.png";
 
@@ -10,6 +12,9 @@ const AnimatedBackground: React.FC = () => {
 	const textRef = useRef<PixiText>(null);
 	const directionRef = useRef(1);
 	const bounceDirectionRef = useRef(1);
+
+	const [email, setEmail] = useState("");
+	const [message, setMessage] = useState("");
 
 	useEffect(() => {
 		const animate = (delta: number) => {
@@ -48,6 +53,56 @@ const AnimatedBackground: React.FC = () => {
 		wordWrapWidth: 300,
 	});
 
+	const sendData = async () => {
+		await fetch(import.meta.env.VITE_DISCORD_WEBHOOK_URL as string, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				username: "Magnolia Music - Feedback Form",
+				avatar_url: "https://magnolia.fillonit.tech/icon.png",
+				content: "",
+				allowed_mentions: {
+					parse: ["users", "roles"],
+				},
+				embeds: [
+					{
+						color: 0x4f46e5,
+						title: "Feedback Form Submission",
+						url: "https://magnolia.fillonit.tech/contact",
+						fields: [
+							{
+								name: "Email",
+								value: email,
+							},
+							{
+								name: "Message",
+								value: message,
+							},
+						],
+						footer: {
+							text: "Magnolia Music - Fillonit",
+							icon_url: "https://magnolia.fillonit.tech/icon.png",
+						},
+					},
+				],
+			}),
+		});
+		toast.success("Message sent succesfully", {
+			position: "top-right",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "dark",
+		});
+		setEmail("");
+		setMessage("");
+	};
+
 	return (
 		<section className="text-gray-600 body-font relative min-h-screen">
 			<div className="absolute inset-0 bg-slate-900">
@@ -80,8 +135,10 @@ const AnimatedBackground: React.FC = () => {
 						Feedback
 					</h2>
 					<p className="leading-relaxed mb-5 text-gray-600">
-						Post-ironic portland shabby chic echo park, banjo
-						fashion axe
+						We value your feedback to improve our music platform.
+						Please share your experiences, thoughts on our music
+						selection, audio quality, and any features you'd like to
+						see in the future.
 					</p>
 					<div className="relative mb-4">
 						<label className="leading-7 text-sm text-gray-600">
@@ -92,6 +149,8 @@ const AnimatedBackground: React.FC = () => {
 							id="email"
 							name="email"
 							className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 						/>
 					</div>
 					<div className="relative mb-4">
@@ -102,17 +161,33 @@ const AnimatedBackground: React.FC = () => {
 							id="message"
 							name="message"
 							className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+							value={message}
+							onChange={(e) => setMessage(e.target.value)}
 						></textarea>
 					</div>
-					<button className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-						Button
+					<button
+						className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+						onClick={sendData}
+					>
+						Send
 					</button>
 					<p className="text-xs text-gray-500 mt-3">
-						Chicharrones blog helvetica normcore iceland tousled
-						brook viral artisan.
+						Your response will be saved anonymously.
 					</p>
 				</div>
 			</div>
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="dark"
+			/>
 		</section>
 	);
 };
