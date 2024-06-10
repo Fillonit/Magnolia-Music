@@ -1,8 +1,14 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Stage, Graphics, Text } from "@pixi/react";
 import { TextStyle } from "@pixi/text";
 
 function GraphicsExample() {
+	const [showIframe, setShowIframe] = useState(false);
+
+	const handleButtonClick = () => {
+		setShowIframe((prevShowIframe) => !prevShowIframe);
+	};
+
 	const drawNotes = useCallback(
 		(g: {
 			bezierCurveTo(
@@ -196,6 +202,23 @@ function GraphicsExample() {
 				<Text text="Piano" x={50} y={160} style={textStyle} />
 				<Graphics draw={drawPiano} />
 			</Stage>
+			<h1 className="text-2xl pt-4 pb-2">
+				Want to try playing the Piano?
+			</h1>
+			<button
+				onClick={handleButtonClick}
+				className="bg-indigo-600 p-6 rounded-none mb-2"
+			>
+				{showIframe ? "Hide the Piano" : "Play the Piano"}
+			</button>
+			{showIframe && (
+				<iframe
+					src="https://4four.io/embed/piano/2AgERNQYC"
+					width="900"
+					height="330"
+					frameBorder="0"
+				></iframe>
+			)}
 		</div>
 	);
 }
