@@ -9,7 +9,6 @@ import Video from "./components/Pixi/Video";
 import Preloader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import Serenade from "./assets/Video/Serenade.mp4";
-// import SongList from "./components/SongList";
 
 const App: React.FC = () => {
 	const [loading, setLoading] = useState(true);
@@ -25,8 +24,6 @@ const App: React.FC = () => {
 		height: window.innerHeight,
 		backgroundColor: 0x1099bb,
 	});
-
-	// const defaultVideoUrl = Serenade;
 
 	if (loading) {
 		return <Preloader />;
@@ -49,19 +46,6 @@ const App: React.FC = () => {
 								element={<Video videoUrl={Serenade} />}
 							/>
 						</Routes>
-						{/* <SongList
-							songs={[
-								{
-									title: "All I Ever Wanted",
-									url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-								},
-								{
-									title: "Menage",
-									url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-								},
-							]}
-							onSongSelect={(song) => console.log(song)}
-						/> */}
 					</AppProvider>
 				</div>
 			</div>
