@@ -32,6 +32,7 @@ const App: React.FC<AppProps> = ({ videoUrl }) => {
 	const videoResource = new VideoResource(videoUrl, {
 		autoPlay: true,
 		loop: true,
+		muted: true,
 	});
 
 	const baseTexture = new BaseTexture(videoResource);

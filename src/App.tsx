@@ -9,6 +9,7 @@ import Video from "./components/Pixi/Video";
 import Preloader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import Serenade from "./assets/Video/Serenade.mp4";
+import Graphics from "./components/Pixi/Graphics";
 
 const App: React.FC = () => {
 	const [loading, setLoading] = useState(true);
@@ -62,6 +63,7 @@ const App: React.FC = () => {
 								path="/video"
 								element={<Video videoUrl={Serenade} />}
 							/>
+							<Route path="/graphics" element={<Graphics />} />
 						</Routes>
 					</AppProvider>
 				</div>
