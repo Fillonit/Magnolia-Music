@@ -1,26 +1,38 @@
-import { Stage, Sprite, useApp, Text } from "@pixi/react";
-import { useEffect } from "react";
+import { Stage, Sprite, useApp, Text as PixiReactText } from "@pixi/react";
+import { Text as PixiText } from "@pixi/text";
+import { useEffect, useRef } from "react";
 
 import Magnolia from "/Magnolia.png";
 
 const AnimatedBackground: React.FC = () => {
 	const app = useApp();
+	const textRef = useRef<PixiText>(null);
+	const directionRef = useRef(1);
+	const bounceDirectionRef = useRef(1);
 
 	useEffect(() => {
-		// app.ticker.add(animate);
-		// return () => {
-		// 	app.ticker.remove(animate);
-		// };
-	}, [app]);
+		const animate = (delta: number) => {
+			if (textRef.current) {
+				textRef.current.x += directionRef.current * delta;
+				textRef.current.y += bounceDirectionRef.current * delta;
+				if (textRef.current.x > 700) {
+					directionRef.current = -1;
+				} else if (textRef.current.x < 300) {
+					directionRef.current = 1;
+				}
+				if (textRef.current.y > 250) {
+					bounceDirectionRef.current = -1;
+				} else if (textRef.current.y < 50) {
+					bounceDirectionRef.current = 1;
+				}
+			}
+		};
 
-	// const animate = (delta: number) => {
-	// 	if (app.stage.children[0]) {
-	// 		app.stage.children[0].x -= 1 * delta;
-	// 		if (app.stage.children[0].x < -250) {
-	// 			app.stage.children[0].x = 0;
-	// 		}
-	// 	}
-	// };
+		app.ticker.add(animate);
+		return () => {
+			app.ticker.remove(animate);
+		};
+	}, [app]);
 
 	return (
 		<Stage width={900} height={300} options={{ backgroundAlpha: 0 }}>
@@ -31,8 +43,8 @@ const AnimatedBackground: React.FC = () => {
 				x={150}
 				y={150}
 			/>
-			{/* <Sprite image={FutureCover} x={250} y={0} /> */}
-			<Text
+			<PixiReactText
+				ref={textRef}
 				text="Magnolia Music"
 				anchor={0.5}
 				x={650}

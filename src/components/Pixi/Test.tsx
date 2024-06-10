@@ -20,7 +20,7 @@ const PixiComponent = () => {
 		let bunny: Sprite;
 
 		function setup() {
-			bunny = new Sprite(Loader.sharedLoader.resources.bunny.texture);
+			bunny = new Sprite(.sharedLoader.resources.bunny.texture);
 
 			bunny.x = app.view.width / 2;
 			bunny.y = app.view.height / 2;
