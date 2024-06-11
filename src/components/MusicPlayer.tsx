@@ -211,6 +211,8 @@ const MusicPlayer: React.FC = () => {
 											<img
 												src={song.cover}
 												alt={song.title}
+												width={128}
+												height={128}
 												className="w-32 h-32 object-cover rounded-lg shadow-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-110 hover:shadow-2xl"
 											/>
 											<p className="text-sm mt-2 font-semibold truncate">
