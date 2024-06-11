@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Application } from "@pixi/app";
 import { AppProvider } from "@pixi/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import MusicPlayer from "./components/MusicPlayer";
-import AnimatedBackground from "./components/Pixi/Background";
-import Video from "./components/Pixi/Video";
 import Preloader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import Serenade from "./assets/Video/Serenade.mp4";
-import Graphics from "./components/Pixi/Graphics";
+
+const MusicPlayer = lazy(() => import("./components/MusicPlayer"));
+const AnimatedBackground = lazy(() => import("./components/Pixi/Background"));
+const Video = lazy(() => import("./components/Pixi/Video"));
+const Graphics = lazy(() => import("./components/Pixi/Graphics"));
 
 const App: React.FC = () => {
 	const [loading, setLoading] = useState(true);
@@ -37,7 +38,6 @@ const App: React.FC = () => {
 			window.addEventListener("load", handleLoad);
 		}
 
-		// Cleanup
 		return () => {
 			window.removeEventListener("load", handleLoad);
 		};
@@ -53,18 +53,23 @@ const App: React.FC = () => {
 				<Navbar />
 				<div className="min-h-screen bg-gray-900 text-white z-50">
 					<AppProvider value={app}>
-						<Routes>
-							<Route path="/" element={<MusicPlayer />} />
-							<Route
-								path="/contact"
-								element={<AnimatedBackground />}
-							/>
-							<Route
-								path="/video"
-								element={<Video videoUrl={Serenade} />}
-							/>
-							<Route path="/graphics" element={<Graphics />} />
-						</Routes>
+						<Suspense fallback={<Preloader />}>
+							<Routes>
+								<Route path="/" element={<MusicPlayer />} />
+								<Route
+									path="/contact"
+									element={<AnimatedBackground />}
+								/>
+								<Route
+									path="/video"
+									element={<Video videoUrl={Serenade} />}
+								/>
+								<Route
+									path="/graphics"
+									element={<Graphics />}
+								/>
+							</Routes>
+						</Suspense>
 					</AppProvider>
 				</div>
 			</div>

@@ -171,7 +171,7 @@ const MusicPlayer: React.FC = () => {
 	};
 
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen">
+		<div className="flex flex-col items-center justify-center min-h-[90vh]">
 			<div className="w-full max-w-screen-lg flex flex-col items-center p-8 bg-slate-800 text-white rounded-lg shadow-2xl">
 				<div className="w-full flex justify-center items-center bg-indigo-700 text-white p-4 rounded-lg mb-4 shadow-lg transition-transform duration-300">
 					<div className="text-center">
