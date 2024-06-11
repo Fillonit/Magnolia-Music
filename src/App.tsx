@@ -16,7 +16,7 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		window.onload = () => {
-			setTimeout(() => setLoading(false), 2000);
+			setTimeout(() => setLoading(false), 500);
 		};
 	}, []);
 
@@ -28,7 +28,7 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		const handleLoad = () => {
-			setTimeout(() => setLoading(false), 2000);
+			setTimeout(() => setLoading(false), 500);
 		};
 
 		if (document.readyState === "complete") {
