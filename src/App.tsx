@@ -11,6 +11,7 @@ const MusicPlayer = lazy(() => import("./components/MusicPlayer"));
 const AnimatedBackground = lazy(() => import("./components/Pixi/Background"));
 const Video = lazy(() => import("./components/Pixi/Video"));
 const Graphics = lazy(() => import("./components/Pixi/Graphics"));
+const NowListening = lazy(() => import("./components/Spotify/NowListening"));
 
 const App: React.FC = () => {
 	const [loading, setLoading] = useState(true);
@@ -49,7 +50,7 @@ const App: React.FC = () => {
 
 	return (
 		<Router>
-			<div className="overflow-hidden overflow-y-hidden">
+			<div className="">
 				<Navbar />
 				<div className="min-h-screen bg-gray-900 text-white z-50">
 					<AppProvider value={app}>
@@ -67,6 +68,10 @@ const App: React.FC = () => {
 								<Route
 									path="/graphics"
 									element={<Graphics />}
+								/>
+								<Route
+									path="/spotify"
+									element={<NowListening />}
 								/>
 							</Routes>
 						</Suspense>
