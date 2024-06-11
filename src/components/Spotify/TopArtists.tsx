@@ -4,6 +4,7 @@ interface Artist {
 	artist: string;
 	artistURL: string;
 	images: { url: string }[];
+	genres: string[];
 }
 
 const TopArtists = () => {
@@ -43,9 +44,14 @@ const TopArtists = () => {
 								alt={`${artist.artist}'s profile picture`}
 								className="w-10 h-10 rounded-full mr-4"
 							/>
-							<span className="text-white no-underline hover:underline">
-								{artist.artist}
-							</span>
+							<div className="flex flex-col">
+								<span className="text-white hover:text-green-500 visited:text-green-700 no-underline">
+									{artist.artist}
+								</span>
+								<span className="text-gray-500 text-sm">
+									{artist.genres.slice(0, 3).join(", ")}
+								</span>
+							</div>
 						</a>
 					</li>
 				))}
