@@ -18,6 +18,8 @@ const SongList: React.FC<SongListProps> = ({ songs, onSongSelect }) => {
 					<button
 						key={index}
 						onClick={() => onSongSelect(song)}
+						name="song-button"
+						aria-label={song.title}
 						className="bg-gray-700 text-white py-2 px-4 rounded-lg shadow-md transition-transform duration-300 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
 					>
 						{song.title}

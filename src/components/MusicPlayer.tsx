@@ -23,15 +23,15 @@ type Song = {
 };
 
 import AllIEverWanted from "../assets/Music/All_I_EVER_WANTED.mp3";
-import FutureCover from "../assets/Image/Future-Cover.jpg";
+import FutureCover from "../assets/Image/Future-Cover.webp";
 import MariaImDrunk from "../assets/Music/Maria I'm Drunk (feat. Justin Bieber & Young Thug).mp3";
-import MariaImDrunkImg from "../assets/Image/MariaImDrunk.jpeg";
+import MariaImDrunkImg from "../assets/Image/MariaImDrunk.webp";
 import Menage from "../assets/Music/Menage (Master).mp3";
-import MenageImg from "../assets/Image/wlr.jpg";
+import MenageImg from "../assets/Image/wlr.webp";
 import RichardMilliePlain from "../assets/Music/Richard Millie Plain.mp3";
-import RichardMilliePlainImg from "../assets/Image/Richard Millie Plain.jpeg";
+import RichardMilliePlainImg from "../assets/Image/Richard Millie Plain.webp";
 import DrugsYouShouldTryIt from "../assets/Music/Travis Scott - Drugs You Should Try It (Music Video).mp3";
-import DrugsYouShouldTryItImg from "../assets/Image/Drugs.jpg";
+import DrugsYouShouldTryItImg from "../assets/Image/Drugs.webp";
 
 const MusicPlayer: React.FC = () => {
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -77,10 +77,10 @@ const MusicPlayer: React.FC = () => {
 	useEffect(() => {
 		if (audioRef.current) {
 			audioRef.current.src = currentSong.src;
-			audioRef.current.oncanplay = function () {
-				audioRef.current!.play();
-				setIsPlaying(true);
-			};
+			// audioRef.current.oncanplay = function () {
+			// 	audioRef.current!.play();
+			// 	setIsPlaying(true);
+			// };
 		}
 	}, [currentSong]);
 
@@ -185,7 +185,7 @@ const MusicPlayer: React.FC = () => {
 							{currentSong.title}
 						</p>
 						<p
-							className="text-md text-indigo-300 animate-fadeInOut"
+							className="text-md text-white animate-fadeInOut"
 							key={currentSong.artist}
 						>
 							{currentSong.artist}
@@ -235,10 +235,13 @@ const MusicPlayer: React.FC = () => {
 					onTimeUpdate={handleTimeUpdate}
 					onLoadedMetadata={handleLoadedMetadata}
 					className="hidden"
+					autoPlay={false}
 				></audio>
 				<div className="controls flex items-center space-x-4 mt-4 w-full px-4 py-2 bg-gray-700 rounded-lg">
 					<button
 						onClick={handlePlayPause}
+						name="play-pause"
+						aria-label={isPlaying ? "Pause" : "Play"}
 						className="bg-indigo-500 hover:bg-indigo-400 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
 					>
 						{isPlaying ? (
@@ -249,12 +252,16 @@ const MusicPlayer: React.FC = () => {
 					</button>
 					<button
 						onClick={skipBackward}
+						aria-label="Skip Backward"
+						name="skip-backward"
 						className="bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-3 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
 					>
 						<HiOutlineBackward size={24} />
 					</button>
 					<button
 						onClick={skipForward}
+						aria-label="Skip Forward"
+						name="skip-forward"
 						className="bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-3 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
 					>
 						<HiOutlineForward size={24} />
@@ -265,6 +272,7 @@ const MusicPlayer: React.FC = () => {
 						max="100"
 						value={(currentTime / duration) * 100 || 0}
 						onChange={handleSeek}
+						aria-label="seekbar"
 						className="w-full h-2 bg-slate-500 accent-indigo-600 rounded-lg cursor-pointer"
 					/>
 					<div className="text-sm font-mono w-1/2">
@@ -273,6 +281,8 @@ const MusicPlayer: React.FC = () => {
 					<div className="controls flex items-center space-x-4 w-full px-4 py-2 bg-gray-700 rounded-lg">
 						<button
 							onClick={toggleMute}
+							aria-label="Toggle Mute"
+							name="toggle-mute"
 							className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-full transition duration-300 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
 						>
 							{isMuted ? (
@@ -287,6 +297,7 @@ const MusicPlayer: React.FC = () => {
 							max="100"
 							value={isMuted ? 0 : volume * 100}
 							onChange={handleVolumeChange}
+							aria-label="volumebar"
 							className="w-full h-2 bg-slate-500 rounded-lg accent-indigo-600 cursor-pointer"
 						/>
 					</div>

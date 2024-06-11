@@ -207,6 +207,8 @@ function GraphicsExample() {
 			</h1>
 			<button
 				onClick={handleButtonClick}
+				name="play-piano-button"
+				aria-label="Play the Piano"
 				className="bg-indigo-600 p-6 rounded-none mb-2"
 			>
 				{showIframe ? "Hide the Piano" : "Play the Piano"}

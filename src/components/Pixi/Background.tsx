@@ -5,7 +5,7 @@ import { TextStyle } from "@pixi/text";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Magnolia from "/Magnolia.png";
+import Magnolia from "/Magnolia.webp";
 
 const AnimatedBackground: React.FC = () => {
 	const app = useApp();
@@ -116,8 +116,8 @@ const AnimatedBackground: React.FC = () => {
 						image={Magnolia}
 						scale={{ x: 0.5, y: 0.5 }}
 						anchor={0.5}
-						x={150}
-						y={150}
+						x={200}
+						y={200}
 					/>
 					<PixiReactText
 						ref={textRef}
@@ -168,6 +168,8 @@ const AnimatedBackground: React.FC = () => {
 					<button
 						className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
 						onClick={sendData}
+						name="send-feedback"
+						aria-label="Send Feedback"
 					>
 						Send
 					</button>

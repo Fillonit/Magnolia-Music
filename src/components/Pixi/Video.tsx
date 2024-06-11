@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BaseTexture, Texture, VideoResource } from "@pixi/core";
 import { Stage, Sprite } from "@pixi/react";
-import Travis from "../../assets/Image/Travis.jpeg";
+import Travis from "../../assets/Image/Travis.webp";
 import { FaArrowRight } from "react-icons/fa";
 
 interface AppProps {
