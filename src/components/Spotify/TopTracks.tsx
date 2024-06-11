@@ -45,7 +45,7 @@ const TopTracks = () => {
 									href={track.songUrl}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-white hover:text-green-500 visited:text-green-700 no-underline"
+									className="text-white hover:text-indigo-500 visited:text-indigo-700 no-underline"
 								>
 									{track.title}
 								</a>

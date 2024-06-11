@@ -52,7 +52,7 @@ const RecentTracks = () => {
 									href={track.trackURL}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-white hover:text-green-500 visited:text-green-700 no-underline"
+									className="text-white hover:text-indigo-500 visited:text-indigo-700 no-underline"
 								>
 									{track.name}
 								</a>
@@ -68,7 +68,7 @@ const RecentTracks = () => {
 													}
 													target="_blank"
 													rel="noopener noreferrer"
-													className="text-gray-500 hover:text-green-500 visited:text-green-700 no-underline"
+													className="text-gray-500 hover:text-indigo-500 visited:text-indigo-700 no-underline"
 												>
 													{artist.name}
 												</a>

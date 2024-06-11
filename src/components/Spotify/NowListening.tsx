@@ -84,7 +84,7 @@ const NowListening = () => {
 				rel="noopener noreferrer"
 			>
 				<div className="flex items-center justify-center mt-8">
-					<FaSpotify className="text-green-500 text-4xl" />
+					<FaSpotify className="text-indigo-600 text-4xl" />
 					<p className="text-white ml-2">View Profile on Spotify</p>
 				</div>
 			</a>
