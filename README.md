@@ -1,5 +1,9 @@
 # Magnolia Player
 
+# Links
+[Website](https://magnolia.fillonit.tech) //
+[GitHub](https://github.com/Fillonit/Magnolia-Music)
+
 ## Performance
 ### PageSpeed Insights
 [![PageSpeed Insights Screenshot](https://fillonit.shx.gg/6D4g9bquP.png)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fmagnolia-player.herokuapp.com%2F)
@@ -9,6 +13,8 @@
 ![Lighthouse Screenshot](https://fillonit.shx.gg/6D4gwTjFq.png)
 
 ## Setup
+For better performance, it is recommended to use the build command and serve the files.
+
 ### Install dependencies
 ```bash
 npm ci
