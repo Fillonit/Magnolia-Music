@@ -6,7 +6,7 @@
 
 ## Performance
 ### PageSpeed Insights
-[![PageSpeed Insights Screenshot](https://fillonit.shx.gg/6D4g9bquP.png)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fmagnolia-player.herokuapp.com%2F)
+[![PageSpeed Insights Screenshot](https://fillonit.shx.gg/6D4g9bquP.png)](https://pagespeed.web.dev/analysis/https-magnolia-fillonit-tech/jfh9p0949u?form_factor=desktop)
 
 
 ### Lighthouse
