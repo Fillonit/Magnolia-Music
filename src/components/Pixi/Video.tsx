@@ -3,6 +3,8 @@ import { BaseTexture, Texture, VideoResource } from "@pixi/core";
 import { Stage, Sprite } from "@pixi/react";
 import Travis from "../../assets/Image/Travis.webp";
 import { FaArrowRight } from "react-icons/fa";
+// import Loader from "../Loader";
+
 
 interface AppProps {
 	videoUrl: string;
@@ -13,6 +15,8 @@ const App: React.FC<AppProps> = ({ videoUrl }) => {
 		width: 900,
 		height: 600,
 	});
+	const [loading, setLoading] = useState(true);
+	const [videoTexture, setVideoTexture] = useState<Texture>();
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -29,33 +33,52 @@ const App: React.FC<AppProps> = ({ videoUrl }) => {
 		};
 	}, []);
 
-	const videoResource = new VideoResource(videoUrl, {
-		autoPlay: true,
-		loop: true,
-		muted: true,
-	});
+	useEffect(() => {
+		const video = document.createElement('video');
+		video.src = videoUrl;
+		video.autoplay = true;
+		video.loop = true;
+		video.muted = true;
+		video.preload = "metadata";
 
-	const baseTexture = new BaseTexture(videoResource);
+		video.addEventListener('loadeddata', () => {
+			setTimeout(() => {
+				setLoading(false);
+				const videoResource = new VideoResource(video);
+				const baseTexture = new BaseTexture(videoResource);
+				setVideoTexture(new Texture(baseTexture));
+			}, 1000);
+		}, { once: true });
 
-	const videoTexture = new Texture(baseTexture);
+		return () => {
+			video.removeEventListener('loadeddata', () => setLoading(false));
+		};
+	}, [videoUrl]);
 
 	return (
 		<section className="text-slate-400 body-font">
 			<div className="container px-5 py-12 mx-auto flex flex-col">
 				<div className="lg:w-4/6 mx-auto">
-					<div className="rounded-lg h-96 overflow-hidden">
-						<Stage
-							width={dimensions.width}
-							height={500}
-							className="object-fit"
-						>
-							<Sprite
-								texture={videoTexture}
+					{loading ? (
+						<div className="relative flex justify-center items-center">
+							<div className="absolute animate-spin rounded-full h-48 w-48 border-t-4 border-b-4 border-amber-700"></div>
+							<img src={Travis} alt="Loading" className="rounded-full h-44 w-44" />
+						</div>
+					) : (
+						<div className="rounded-lg h-96 overflow-hidden">
+							<Stage
 								width={dimensions.width}
 								height={500}
-							/>
-						</Stage>
-					</div>
+								className="object-fit"
+							>
+								<Sprite
+									texture={videoTexture}
+									width={dimensions.width}
+									height={500}
+								/>
+							</Stage>
+						</div>
+					)}
 					<div className="flex flex-col sm:flex-row mt-10">
 						<div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
 							<div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
