@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { SiMusicbrainz } from "react-icons/si";
 import { FiGithub } from "react-icons/fi";
 
 const Loader: React.FC = () => {
+	const githubIconRef = useRef<HTMLButtonElement>(null);
+
+    useEffect(() => {
+        const githubIcon = githubIconRef.current;
+
+        const startRotation = () => {
+            if (githubIcon) {
+                githubIcon.style.transition = 'transform 0.5s';
+                githubIcon.style.transform = 'rotate(360deg)';
+            }
+        };
+
+        const resetRotation = () => {
+            if (githubIcon) {
+                githubIcon.style.transform = 'rotate(0deg)';
+            }
+        };
+
+        githubIcon?.addEventListener('mouseenter', startRotation);
+        githubIcon?.addEventListener('mouseleave', resetRotation);
+
+        return () => {
+            githubIcon?.removeEventListener('mouseenter', startRotation);
+            githubIcon?.removeEventListener('mouseleave', resetRotation);
+        };
+    }, []);
 	return (
 		<header className="text-indigo-200 body-font bg-indigo-950">
 			<div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -34,6 +60,7 @@ const Loader: React.FC = () => {
 				</nav>
 				<a href="https://github.com/Fillonit/Magnolia-Music/">
 					<button
+						ref={githubIconRef}
 						name="GitHub Repository"
 						aria-label="GitHub Repository"
 						className="text-white inline-flex items-center bg-indigo-700 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-800 rounded text-base mt-4 md:mt-0"
